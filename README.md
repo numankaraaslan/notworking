@@ -12,7 +12,7 @@ localhost:8080/book/delete
 
 localhost:8080/author/save
 
-localhost:8080/book/1
+localhost:8080/author/1
 
 localhost:8080/actuator/env
 
