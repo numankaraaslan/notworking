@@ -12,7 +12,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableMethodSecurity(jsr250Enabled = true, prePostEnabled = true, securedEnabled = true)
+@EnableMethodSecurity
 public class SecurityConfig
 {
 	@Bean
@@ -20,7 +20,6 @@ public class SecurityConfig
 	{
 		httpSecurity.sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 		httpSecurity.csrf(c -> c.disable());
-		httpSecurity.httpBasic(c -> Customizer.withDefaults());
 		httpSecurity.userDetailsService(getUserDetailsService());
 		return httpSecurity.build();
 	}
@@ -28,7 +27,7 @@ public class SecurityConfig
 	private UserDetailsService getUserDetailsService()
 	{
 		InMemoryUserDetailsManager imudm = new InMemoryUserDetailsManager();
-		imudm.createUser(User.builder().username("user").password("{noop}1234").roles("ADMIN").build());
+		imudm.createUser(User.builder().username("user").password("noop1234").roles("ADNIN").build());
 		return imudm;
 	}
 }

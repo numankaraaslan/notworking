@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import com.example.notworking.model.Author;
 import com.example.notworking.repo.AuthorRepo;
 
-@Service
 public class AuthorService
 {
 	private AuthorRepo authorRepo;
@@ -22,7 +21,7 @@ public class AuthorService
 
 	public Author getAuthorByName(String name)
 	{
-		return authorRepo.getAuthorByName(name);
+		return authorRepo.getAuthor_ByName(name);
 	}
 
 	public Author getById(Long id)

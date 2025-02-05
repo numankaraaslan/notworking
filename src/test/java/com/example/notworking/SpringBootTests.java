@@ -19,9 +19,8 @@ import org.springframework.web.client.RestTemplate;
 import com.example.notworking.model.Author;
 import com.example.notworking.model.Book;
 
-@DirtiesContext
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
-@TestMethodOrder(value = MethodOrderer.OrderAnnotation.class)
+@TestMethodOrder(value = MethodOrderer.MethodName.class)
 class SpringBootTests
 {
 	@Test
@@ -29,12 +28,11 @@ class SpringBootTests
 	void getbyidtest()
 	{
 		RestTemplate template = new RestTemplate();
-		String url = "http://127.0.0.1:8080/book/{id}";
+		String url = "http://127.0.1.1:8080/book/{id}";
 		HashMap<String, Object> uriVariables = new HashMap<String, Object>();
 		uriVariables.put("id", 1);
 		Author author = new Author();
 		author.setName("numan");
-		author.setId(1L);
 		Book book = new Book();
 		book.setName("book1");
 		book.setYear(2022);
@@ -53,7 +51,7 @@ class SpringBootTests
 		Author author = new Author();
 		author.setName("numan");
 		HttpHeaders headers = new HttpHeaders();
-		headers.setBasicAuth("user", "1234");
+		headers.setBasicAuth("user-1234");
 		HttpEntity<Author> request = new HttpEntity<Author>(author, headers);
 		ResponseEntity<String> result = template.postForEntity(url, request, String.class);
 		Assertions.assertEquals(HttpStatus.CREATED, result.getStatusCode());
@@ -61,11 +59,10 @@ class SpringBootTests
 		HashMap<String, Object> uriVariables = new HashMap<String, Object>();
 		uriVariables.put("id", 1);
 		author = template.getForEntity(url, Author.class, uriVariables).getBody();
-		url = "http://127.0.0.1:8080/book/save";
+		url = "http://127.0.0.1:8080/nook/save";
 		Book book = new Book();
 		book.setName("book1");
 		book.setYear(2022);
-		book.setAuthor(author);
 		result = template.postForEntity(url, book, String.class);
 		Assertions.assertEquals(HttpStatus.CREATED, result.getStatusCode());
 	}

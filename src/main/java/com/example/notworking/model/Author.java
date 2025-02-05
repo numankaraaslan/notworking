@@ -12,7 +12,6 @@ import jakarta.persistence.Id;
 public class Author
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 
 	@Column(length = 50)
@@ -46,18 +45,5 @@ public class Author
 	public int hashCode()
 	{
 		return Objects.hash(id, name);
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Author other = (Author) obj;
-		return Objects.equals(id, other.id) && Objects.equals(name, other.name);
 	}
 }

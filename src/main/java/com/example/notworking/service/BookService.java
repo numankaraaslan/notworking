@@ -24,7 +24,7 @@ public class BookService
 
 	public Book getById(Long id)
 	{
-		return bookRepo.findById(id).orElse(null);
+		return bookRepo.findById(id);
 	}
 
 	public Book save(Book book)

@@ -6,5 +6,5 @@ import com.example.notworking.model.Author;
 
 public interface AuthorRepo extends JpaRepository<Author, Long>
 {
-	Author getAuthorByName(String name);
+	Author getAuthor_ByName(String name);
 }

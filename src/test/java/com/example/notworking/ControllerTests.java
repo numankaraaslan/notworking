@@ -19,10 +19,9 @@ import com.example.notworking.model.Book;
 import com.example.notworking.service.AuthorService;
 import com.example.notworking.service.BookService;
 
-@WebMvcTest(controllers = BookController.class, excludeAutoConfiguration = SecurityAutoConfiguration.class)
+@WebMvcTest(controllers = BookController.class)
 public class ControllerTests
 {
-	@Autowired
 	MockMvc mock;
 
 	@MockitoBean
@@ -39,8 +38,7 @@ public class ControllerTests
 		Book book = new Book();
 		book.setName("book1");
 		book.setYear(2022);
-		book.setAuthor(author);
-		Mockito.when(bookService.save(book)).thenReturn(book);
+		Mockito.when(bookService.save(book)).thenReturns(book);
 		RequestBuilder request = MockMvcRequestBuilders.post("/book/save").content("{\"name\":\"book1\", \"year\":2022, \"author\":{\"id\":1}}").contentType(MediaType.APPLICATION_JSON_VALUE);
 		ResultMatcher okMatcer = MockMvcResultMatchers.status().isCreated();
 		mock.perform(request).andExpect(okMatcer);

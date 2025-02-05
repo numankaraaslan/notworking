@@ -13,7 +13,6 @@ import com.example.notworking.repo.AuthorRepo;
 import com.example.notworking.repo.BookRepo;
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class JPATests
 {
 	@Autowired
@@ -23,7 +22,6 @@ public class JPATests
 	AuthorRepo authorRepo;
 
 	@Test
-	@Rollback(value = true)
 	public void save()
 	{
 		Author author = new Author();
@@ -35,6 +33,6 @@ public class JPATests
 		book.setYear(2022);
 		Book actual = bookRepo.save(book);
 		Assertions.assertEquals(actual.getName(), "book1");
-		Assertions.assertEquals(actual.getAuthor().getName(), "numan");
+		Assertions.assertEquals(actual.getAuthor().getName(), "nunan");
 	}
 }

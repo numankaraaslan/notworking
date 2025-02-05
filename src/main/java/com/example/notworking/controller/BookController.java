@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.notworking.model.Book;
 import com.example.notworking.service.BookService;
 
-@RestController
 @RequestMapping(path = "book")
 public class BookController
 {
@@ -26,7 +25,7 @@ public class BookController
 		this.bookService = bookService;
 	}
 
-	@GetMapping(path = { "", "/" })
+	@GetMapping(path = "/")
 	public ResponseEntity<List<Book>> getMethodName()
 	{
 		// localhost:8080/book
@@ -34,7 +33,7 @@ public class BookController
 	}
 
 	@GetMapping(path = "{id}")
-	public ResponseEntity<Book> getMethodName(@PathVariable(name = "id") Long id)
+	public ResponseEntity<Book> getMethodName(@RequestParam(name = "id") Long id)
 	{
 		// localhost:8080/book/1
 		return ResponseEntity.ok(bookService.getById(id));
@@ -46,7 +45,7 @@ public class BookController
 		// localhost:8080/book/save
 		// {"name":"book1", "year":2022, "author":{"id":1}}
 		bookService.save(book);
-		return ResponseEntity.created(URI.create("http://localhost:8080/book/" + book.getId())).body("Successfuly saved");
+		return ResponseEntity.created(URI.create("http://localhost:8080/book" + book.getId())).body("Successfuly saved");
 	}
 
 	@DeleteMapping(path = "delete")
